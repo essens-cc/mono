@@ -1,0 +1,22 @@
+---
+interface Props {
+  url: string;
+  title: string;
+  date: string;
+  category: string
+}
+
+const { url, title, date, category } = Astro.props
+---
+<li>
+<a href={url}>
+   <div>
+     <span>{title}</span>
+     <span class="category">
+       / {category}
+     </span>
+   </div>
+   <span class="date">{date}</span>
+ </a>
+</li>
+

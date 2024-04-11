@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { getCollection, getEntry } from 'astro:content';
+import Back from "../components/Back.astro"
+import Header from "../components/Header.astro"
+
+const page = await getEntry('pages', 'about')
+const { Content, headings } = await page.render();
+
+---
+<Layout title={page.data.title} desc={page.data.description}>
+  <Back title="index" href="/" />
+  <Header
+		title={page.data.title}
+     created={page.data.created}
+     updated={page.data.updated}
+	/>
+  <article>
+     <Content />
+  </article>
+</Layout>
+

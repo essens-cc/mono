@@ -1,0 +1,30 @@
+---
+interface Props {
+  next: number;
+  previous: number
+}
+
+const { next, previous } = Astro.props
+---
+<div class="paginator">
+   {
+    previous ? (
+      <a
+        href={previous}
+      >
+        &larr; Previous
+      </a>
+    ) : null
+  }
+  {
+    next ? (
+      <a
+        href={next}
+      >
+        Next &rarr;
+      </a>
+    ) : null
+  }
+</div>
+
+

@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  created?: string;
+  updated?: string;
+  author?: string;
+  source?: string
+}
+
+const { title, author, source, created, updated } = Astro.props
+---
+<header>
+  <h1>{title}</h1>
+  <div class="metadata">
+  {created ? (<p>Created: {created}</p>) : null}
+  {updated != created ? (<p>Updated: {updated}</p>) : null}
+  {author ? (<p> Author: {author}</p>) : null}
+  {source? (<p> Source: <a href={source} target="_blank">url</a></p>) : null}
+</div>
+</header>
+

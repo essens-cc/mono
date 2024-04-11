@@ -1,0 +1,42 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import { fade } from 'astro:transitions';
+
+interface Props {
+	title: string;
+	desc: string;
+}
+
+const { title, desc } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={desc} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={desc} />
+    <link rel="stylesheet" href="/css/global.css" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={desc} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={desc} />
+		
+		<ViewTransitions />    
+    
+		<title>{title} | Mør</title>
+  </head>
+	<body transition:animate={fade({ duration: '0.3s' })}>
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+

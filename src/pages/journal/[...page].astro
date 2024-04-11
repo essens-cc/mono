@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro"
+import ListItem from "../../components/ListItem.astro"
+import Paginator from "../../components/Paginator.astro"
+import Back from "../../components/Back.astro"
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('blog', ({ data }) => {
+  return data.published == true;
+})
+  const blog = allPosts.sort(function (a, b) {
+  return b.data.created - a.data.created;
+})
+return paginate(blog, { pageSize: 20 });
+}
+
+
+const { page } = Astro.props;
+const params = Astro.params;
+---
+<Layout title="Journal" desc="A catchall for finds, discoveries, ideas, and questions">
+  <Back title="index" href="/" />
+  <ul class="index">
+    {page.data?.map(p => (
+      <ListItem url={`/journal/${p.slug}`}
+                title={p.data.title}
+                date={p.data.created.toISOString().slice(0, 10)}
+                category={p.data.category} />
+    ))}
+  </ul>
+  <Paginator
+    previous={page.url.prev}
+    next={page.url.next}
+  />
+</Layout>
+
+
